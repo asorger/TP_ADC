@@ -68,11 +68,6 @@ def cria_novo_leitor():
 
     Exemplos
     --------
-    Supondo que o usuário insira os seguintes dados:
-    Nome: João
-    Idade: 22
-    Email: joao@email.com
-
     >>> leitor = cria_novo_leitor()
     Nome do leitor: João
     Idade do leitor: 22
