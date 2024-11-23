@@ -1,5 +1,4 @@
 def menu():
-    """Menu principal da aplicação"""
 
     lista_de_livros = []
     lista_de_leitores = []
@@ -73,3 +72,6 @@ def menu():
         elif op == "le":
             imprime_lista_de_emprestimos(lista_de_emprestimos)
             pausa()
+
+if __name__ == "__main__":
+    menu()
