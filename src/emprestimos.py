@@ -25,6 +25,9 @@ class Emprestimo:
 
     cria_novo_emprestimo(leitores, livros, funcionarios):
         Cria e retorna um novo empréstimo, permitindo que o usuário escolha o leitor, livro, funcionário e as datas de empréstimo e devolução.
+
+    imprime_lista_de_emprestimos(emprestimos):
+        Imprime uma lista de todos os empréstimos, mostrando suas informações formatadas.
     """
 
     def __init__(self, leitor, livro, funcionario, data_emprestimo, data_devolucao):
@@ -117,3 +120,30 @@ class Emprestimo:
         data_devolucao = input("Data de devolução (dd/mm/yyyy): ")
 
         return Emprestimo(leitor, livro, funcionario, data_emprestimo, data_devolucao)
+
+    @staticmethod
+    def imprime_lista_de_emprestimos(emprestimos):
+        """
+        Imprime uma lista de todos os empréstimos, mostrando suas informações formatadas.
+
+        Parameters
+        ----------
+        emprestimos : list of Emprestimo
+            Lista de objetos da classe Emprestimo que representam os empréstimos a serem exibidos.
+
+        Returns
+        -------
+        None
+            A função não retorna nada, apenas imprime a lista de empréstimos no console.
+
+        Example
+        -------
+        >>> emprestimos = [emprestimo1, emprestimo2]
+        >>> imprime_lista_de_emprestimos(emprestimos)
+        Lista de Empréstimos:
+        Empréstimo: João Silva - O Poder do Hábito | Funcionário: Maria Oliveira | Devolução: 2024-12-22
+        Empréstimo: Ana Souza - 1984 | Funcionário: João Lima | Devolução: 2024-11-30
+        """
+        print("Lista de Empréstimos:")
+        for emprestimo in emprestimos:
+            print(emprestimo)
