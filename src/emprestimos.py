@@ -1,59 +1,119 @@
-from datetime import date
-from io_terminal import imprime_lista, pergunta_id
-import pickle
+class Emprestimo:
+    """
+    Classe que representa um empréstimo de livro em uma biblioteca.
 
-nome_ficheiro_lista_de_emprestimos = "lista_de_emprestimos.pk"
+    A classe armazena informações sobre o empréstimo de um livro por um leitor, incluindo os detalhes do livro,
+    do funcionário responsável e as datas de empréstimo e devolução.
 
-def pergunta_id(questao, lista, mostra_lista=False):
-    if mostra_lista:
-        print(questao)
-        for item in lista:
-            print(f"{item['id']}: {item['nome']}")
-    id_escolhido = input("Digite o ID desejado: ")
-    return int(id_escolhido)
+    Attributes
+    ----------
+    leitor : Leitor
+        Objeto da classe Leitor que representa o usuário que fez o empréstimo.
+    livro : Livro
+        Objeto da classe Livro que representa o livro emprestado.
+    funcionario : Funcionario
+        Objeto da classe Funcionario que representa o funcionário que processou o empréstimo.
+    data_emprestimo : str
+        A data em que o empréstimo foi feito (formato: 'YYYY-MM-DD').
+    data_devolucao : str
+        A data em que o livro deve ser devolvido (formato: 'YYYY-MM-DD').
 
-def cria_novo_emprestimo(lista_de_leitores, lista_de_livros, lista_de_funcionarios):
-    id_leitor = pergunta_id(questao="Qual o id do leitor?", lista=lista_de_leitores, mostra_lista=True)
-    id_livro = pergunta_id(questao="Qual o id do livro?", lista=lista_de_livros, mostra_lista=True)
-    id_funcionario = pergunta_id(questao="Qual o id do funcionário?", lista=lista_de_funcionarios, mostra_lista=True)
-    data_devolucao = input("Qual a data de devolução do livro? (Formato: YYYY-MM-DD): ")
-    try:
-        data_devolucao = date.fromisoformat(data_devolucao)
-    except ValueError:
-        print("Data inválida. Usando a data atual como data de devolução.")
-        data_devolucao = date.today()
-    
-    emprestimo = {
-        "leitor": id_leitor,
-        "livro": id_livro,
-        "funcionario": id_funcionario,
-        "data_emprestimo": date.today(),
-        "data_devolucao": data_devolucao
-    }
+    Methods
+    -------
+    __str__():
+        Retorna uma string formatada representando o empréstimo com informações do leitor, livro, funcionário e data de devolução.
 
-    return emprestimo
+    cria_novo_emprestimo(leitores, livros, funcionarios):
+        Cria e retorna um novo empréstimo, permitindo que o usuário escolha o leitor, livro, funcionário e as datas de empréstimo e devolução.
+    """
 
-def imprime_lista_de_emprestimos(lista_de_emprestimos):
-    for emprestimo in lista_de_emprestimos:
-        leitor_id = emprestimo["leitor"]
-        livro_id = emprestimo["livro"]
-        funcionario_id = emprestimo["funcionario"]
-        data_emprestimo = emprestimo["data_emprestimo"]
-        data_devolucao = emprestimo["data_devolucao"]
+    def __init__(self, leitor, livro, funcionario, data_emprestimo, data_devolucao):
+        """
+        Constrói uma instância de Emprestimo.
+
+        Parameters
+        ----------
+        leitor : Leitor
+            Objeto da classe Leitor que representa o usuário que fez o empréstimo.
+        livro : Livro
+            Objeto da classe Livro que representa o livro emprestado.
+        funcionario : Funcionario
+            Objeto da classe Funcionario que representa o funcionário que processou o empréstimo.
+        data_emprestimo : str
+            A data em que o empréstimo foi feito (formato: 'YYYY-MM-DD').
+        data_devolucao : str
+            A data em que o livro deve ser devolvido (formato: 'YYYY-MM-DD').
+
+        """
+        self.leitor = leitor
+        self.livro = livro
+        self.funcionario = funcionario
+        self.data_emprestimo = data_emprestimo
+        self.data_devolucao = data_devolucao
+
+    def __str__(self):
+        """
+        Retorna uma string formatada representando o empréstimo.
+
+        Returns
+        -------
+        str
+            String que contém o nome do leitor, título do livro, nome do funcionário e a data de devolução.
         
-        print(f"Empréstimo: Leitor ID {leitor_id}, Livro ID {livro_id}, Funcionário ID {funcionario_id}")
-        print(f"Data de Empréstimo: {data_emprestimo}")
-        print(f"Data de Devolução: {data_devolucao}")
-        print("-" * 50)
+        Example
+        -------
+        >>> emprestimo = Emprestimo(leitor, livro, funcionario, "2024-11-22", "2024-12-22")
+        >>> print(emprestimo)
+        'Empréstimo: João Silva - O Poder do Hábito | Funcionário: Maria Oliveira | Devolução: 2024-12-22'
+        """
+        return f"Empréstimo: {self.leitor.nome} - {self.livro.titulo} | Funcionário: {self.funcionario.nome} | Devolução: {self.data_devolucao}"
 
-def salvar_lista_emprestimos(lista_de_emprestimos, nome_ficheiro):
-    with open(nome_ficheiro, "wb") as file:
-        pickle.dump(lista_de_emprestimos, file)
+    @staticmethod
+    def cria_novo_emprestimo(leitores, livros, funcionarios):
+        """
+        Cria e retorna um novo empréstimo, permitindo que o usuário escolha o leitor, livro, funcionário e as datas de empréstimo e devolução.
 
-def carregar_lista_emprestimos(nome_ficheiro):
-    try:
-        with open(nome_ficheiro, "rb") as file:
-            lista_de_emprestimos = pickle.load(file)
-    except FileNotFoundError:
-        lista_de_emprestimos = []
-    return lista_de_emprestimos
+        Parameters
+        ----------
+        leitores : list of Leitor
+            Lista de objetos da classe Leitor, que representam os leitores disponíveis para o empréstimo.
+        livros : list of Livro
+            Lista de objetos da classe Livro, que representam os livros disponíveis para o empréstimo.
+        funcionarios : list of Funcionario
+            Lista de objetos da classe Funcionario, que representam os funcionários disponíveis para processar o empréstimo.
+
+        Returns
+        -------
+        Emprestimo
+            Uma nova instância da classe Emprestimo com as escolhas do usuário para o leitor, livro, funcionário e datas.
+        
+        Example
+        -------
+        >>> leitores = [leitor1, leitor2]
+        >>> livros = [livro1, livro2]
+        >>> funcionarios = [funcionario1, funcionario2]
+        >>> emprestimo = Emprestimo.cria_novo_emprestimo(leitores, livros, funcionarios)
+        'Empréstimo: João Silva - O Poder do Hábito | Funcionário: Maria Oliveira | Devolução: 2024-12-22'
+        """
+        print("Escolha um leitor:")
+        for i, leitor in enumerate(leitores):
+            print(f"{i + 1}. {leitor.nome}")
+        leitor_index = int(input("Escolha o número do leitor: ")) - 1
+        leitor = leitores[leitor_index]
+
+        print("Escolha um livro:")
+        for i, livro in enumerate(livros):
+            print(f"{i + 1}. {livro.titulo}")
+        livro_index = int(input("Escolha o número do livro: ")) - 1
+        livro = livros[livro_index]
+
+        print("Escolha um funcionário:")
+        for i, funcionario in enumerate(funcionarios):
+            print(f"{i + 1}. {funcionario.nome}")
+        funcionario_index = int(input("Escolha o número do funcionário: ")) - 1
+        funcionario = funcionarios[funcionario_index]
+
+        data_emprestimo = input("Data do empréstimo (dd/mm/yyyy): ")
+        data_devolucao = input("Data de devolução (dd/mm/yyyy): ")
+
+        return Emprestimo(leitor, livro, funcionario, data_emprestimo, data_devolucao)
