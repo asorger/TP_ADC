@@ -52,4 +52,26 @@ class Livro:
             Representação do livro com título, autor e ano de publicação.
         """
         return f"Livro: {self.titulo}, Autor: {self.autor}, Ano: {self.ano_publicacao}"
- 
+
+def cria_novo_livro():
+    """
+    Cria um novo livro solicitando título, autor e ano de publicação ao usuário.
+
+    Returns
+    -------
+    Livro
+        Objeto `Livro` criado com os dados fornecidos pelo usuário.
+
+    Exemplos
+    --------
+    >>> livro = cria_novo_livro()
+    Título do livro: Dom Quixote
+    Autor do livro: Miguel de Cervantes
+    Ano de publicação do livro: 1605
+    >>> print(livro)
+    Livro: Dom Quixote, Autor: Miguel de Cervantes, Ano: 1605
+    """
+    titulo = input("Título do livro: ")
+    autor = input("Autor do livro: ")
+    ano_publicacao = int(input("Ano de publicação do livro: "))
+    return Livro(titulo, autor, ano_publicacao)
