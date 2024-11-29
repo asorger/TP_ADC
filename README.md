@@ -52,13 +52,17 @@ src/
 
 1. Certifique-se de que você tem o Python 3 instalado na sua máquina.
 2. Clone este repositório ou baixe os arquivos.
-3. Navegue até o dirétorio do projeto no terminal
-4. execute o programa com o seguinte comando:
+3. Instale os requirments necessários para o funcionamento do programa com o seguinte comando:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Navegue até o dirétorio do projeto no terminal
+5. Execute o programa com o seguinte comando:
     
     ```bash
     python main.py
     ```
-5. siga as instruções no menu para gerenciar a biblioteca.
+6. Siga as instruções no menu para gerenciar a biblioteca.
 
 >[!CAUTION]
 > Python 3.8 ou superior é necessário para o funcionamento do programa.
