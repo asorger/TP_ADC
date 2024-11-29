@@ -45,3 +45,63 @@ def guarda_as_listas_em_ficheiros(livros: list, leitores: list, emprestimos: lis
         json.dump([funcionario.__dict__ for funcionario in funcionarios], f)
 
     print("Dados salvos com sucesso!")
+
+def carrega_as_listas_dos_ficheiros():
+    """
+    Carrega listas de livros, leitores, empréstimos e funcionários a partir de arquivos JSON.
+
+    Esta função lê os dados dos arquivos `livros.json`, `leitores.json`, 
+    `emprestimos.json` e `funcionarios.json`, recriando as listas correspondentes 
+    a partir das informações armazenadas. Caso algum arquivo não seja encontrado, 
+    retorna uma lista vazia para aquele tipo de dado.
+
+    Returns
+    -------
+    tuple
+        Uma tupla contendo quatro listas:
+        - livros : list of Livro
+            Lista de objetos da classe `Livro` carregados do arquivo.
+        - leitores : list of Leitor
+            Lista de objetos da classe `Leitor` carregados do arquivo.
+        - emprestimos : list of Emprestimo
+            Lista de objetos da classe `Emprestimo` carregados do arquivo.
+        - funcionarios : list of Funcionario
+            Lista de objetos da classe `Funcionario` carregados do arquivo.
+
+    Exemplos
+    --------
+    >>> livros, leitores, emprestimos, funcionarios = carrega_as_listas_dos_ficheiros()
+    >>> print(len(livros))
+    10  # Supondo que havia 10 livros armazenados.
+    >>> print(len(leitores))
+    5   # Supondo que havia 5 leitores armazenados.
+    """
+    try:
+        with open('livros.json', 'r') as f:
+            livros_data = json.load(f)
+            livros = [Livro(**livro) for livro in livros_data]
+    except FileNotFoundError:
+        livros = []
+
+    try:
+        with open('leitores.json', 'r') as f:
+            leitores_data = json.load(f)
+            leitores = [Leitor(**leitor) for leitor in leitores_data]
+    except FileNotFoundError:
+        leitores = []
+
+    try:
+        with open('emprestimos.json', 'r') as f:
+            emprestimos_data = json.load(f)
+            emprestimos = [Emprestimo(**emprestimo) for emprestimo in emprestimos_data]
+    except FileNotFoundError:
+        emprestimos = []
+
+    try:
+        with open('funcionarios.json', 'r') as f:
+            funcionarios_data = json.load(f)
+            funcionarios = [Funcionario(**funcionario) for funcionario in funcionarios_data]
+    except FileNotFoundError:
+        funcionarios = []
+
+    return livros, leitores, emprestimos, funcionarios
