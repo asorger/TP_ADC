@@ -87,4 +87,4 @@ src/
 - Melhorar a validação de dados no momento do cadastro.
 
 >[!IMPORTANT]
-> Estas funcionalidades e melhorias ainda não se encontram desenvolvidas nesta versão incial do programa.
+> Estas funcionalidades e melhorias ainda não se encontram desenvolvidas nesta versão inicial do programa.
