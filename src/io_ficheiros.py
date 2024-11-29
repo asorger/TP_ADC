@@ -70,13 +70,13 @@ def carrega_as_listas_dos_ficheiros():
     tuple
         Uma tupla contendo quatro listas:
         - livros : list of Livro
-            Lista de objetos da classe `Livro` carregados do arquivo.
+        Lista de objetos da classe `Livro` carregados do arquivo.
         - leitores : list of Leitor
-            Lista de objetos da classe `Leitor` carregados do arquivo.
+        Lista de objetos da classe `Leitor` carregados do arquivo.
         - emprestimos : list of Emprestimo
-            Lista de objetos da classe `Emprestimo` carregados do arquivo.
+        Lista de objetos da classe `Emprestimo` carregados do arquivo.
         - funcionarios : list of Funcionario
-            Lista de objetos da classe `Funcionario` carregados do arquivo.
+        Lista de objetos da classe `Funcionario` carregados do arquivo.
 
     Exemplos
     --------
