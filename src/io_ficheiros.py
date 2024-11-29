@@ -1,5 +1,10 @@
 import json
 
+from leitores import Leitor
+from emprestimos import Emprestimo
+from livros import Livro
+from funcionarios import Funcionario
+
 def guarda_as_listas_em_ficheiros(livros: list, leitores: list, emprestimos: list , funcionarios: list) -> None:
     """
     Salva listas de livros, leitores, empréstimos e funcionários em arquivos JSON.
