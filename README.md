@@ -64,8 +64,15 @@ src/
     ```
 6. Siga as instruções no menu para gerenciar a biblioteca.
 
+>[!TIP]
+> Pode criar um novo ambiente virutal de Python dentro deste projeto, para maior organização. pode usar o seguinte comando:
+>  ```bash 
+>  python -m venv venv
+> ```
+
 >[!CAUTION]
 > Python 3.8 ou superior é necessário para o funcionamento do programa.
+
 ## Exemplos de uso
 
 ### Cadastre de um novo livro
