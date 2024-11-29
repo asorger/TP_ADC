@@ -1,2 +1,3 @@
 tabulate
 sphinx
+sphinx_book_theme
