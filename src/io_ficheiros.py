@@ -1,5 +1,5 @@
 import json
-
+import os
 from leitores import Leitor
 from emprestimos import Emprestimo
 from livros import Livro
@@ -11,7 +11,8 @@ def guarda_as_listas_em_ficheiros(livros: list, leitores: list, emprestimos: lis
 
     Esta função serializa objetos das listas fornecidas e os armazena nos 
     respectivos arquivos JSON: `livros.json`, `leitores.json`, `emprestimos.json` 
-    e `funcionarios.json`.
+    e `funcionarios.json` que se encontram dentro da pasta `save`.
+    Se a pasta `save` não existir, será criada.
 
     Parâmetros
     ----------
@@ -37,16 +38,20 @@ def guarda_as_listas_em_ficheiros(livros: list, leitores: list, emprestimos: lis
     >>> guarda_as_listas_em_ficheiros(livros, leitores, emprestimos, funcionarios)
     Dados salvos com sucesso!
     """
-    with open('livros.json', 'w') as f:
+    if not os.path.exists('save'):
+        os.makedirs('save')
+
+
+    with open('save/livros.json', 'w') as f:
         json.dump([livro.__dict__ for livro in livros], f)
 
-    with open('leitores.json', 'w') as f:
+    with open('save/leitores.json', 'w') as f:
         json.dump([leitor.__dict__ for leitor in leitores], f)
 
-    with open('emprestimos.json', 'w') as f:
+    with open('save/emprestimos.json', 'w') as f:
         json.dump([emprestimo.__dict__ for emprestimo in emprestimos], f)
 
-    with open('funcionarios.json', 'w') as f:
+    with open('save/funcionarios.json', 'w') as f:
         json.dump([funcionario.__dict__ for funcionario in funcionarios], f)
 
     print("Dados salvos com sucesso!")
@@ -82,28 +87,28 @@ def carrega_as_listas_dos_ficheiros():
     5   # Supondo que havia 5 leitores armazenados.
     """
     try:
-        with open('livros.json', 'r') as f:
+        with open('save/livros.json', 'r') as f:
             livros_data = json.load(f)
             livros = [Livro(**livro) for livro in livros_data]
     except FileNotFoundError:
         livros = []
 
     try:
-        with open('leitores.json', 'r') as f:
+        with open('save/leitores.json', 'r') as f:
             leitores_data = json.load(f)
             leitores = [Leitor(**leitor) for leitor in leitores_data]
     except FileNotFoundError:
         leitores = []
 
     try:
-        with open('emprestimos.json', 'r') as f:
+        with open('save/emprestimos.json', 'r') as f:
             emprestimos_data = json.load(f)
             emprestimos = [Emprestimo(**emprestimo) for emprestimo in emprestimos_data]
     except FileNotFoundError:
         emprestimos = []
 
     try:
-        with open('funcionarios.json', 'r') as f:
+        with open('save/funcionarios.json', 'r') as f:
             funcionarios_data = json.load(f)
             funcionarios = [Funcionario(**funcionario) for funcionario in funcionarios_data]
     except FileNotFoundError:
