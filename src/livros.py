@@ -53,7 +53,7 @@ class Livro:
         """
         return f"Livro: {self.titulo}, Autor: {self.autor}, Ano: {self.ano_publicacao}"
 
-def cria_novo_livro():
+def cria_novo_livro() -> Livro:
     """
     Cria um novo livro solicitando título, autor e ano de publicação ao usuário.
 
