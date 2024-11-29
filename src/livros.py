@@ -75,3 +75,30 @@ def cria_novo_livro():
     autor = input("Autor do livro: ")
     ano_publicacao = int(input("Ano de publicação do livro: "))
     return Livro(titulo, autor, ano_publicacao)
+
+
+def imprime_lista_de_livros(livros: list):
+    """
+    Imprime a lista de livros fornecida.
+
+    Parâmetros
+    ----------
+    livros : list of Livro
+        Lista contendo objetos da classe `Livro`.
+
+    Returns
+    -------
+    None
+
+    Exemplos
+    --------
+    >>> livros = [Livro("Dom Quixote", "Miguel de Cervantes", "1605"), 
+    ...           Livro("Orgulho e Preconceito", "Jane Austen", "1813")]
+    >>> imprime_lista_de_livros(livros)
+    Lista de Livros:
+    Livro: Dom Quixote, Autor: Miguel de Cervantes, Ano: 1605
+    Livro: Orgulho e Preconceito, Autor: Jane Austen, Ano: 1813
+    """
+    print("Lista de Livros:")
+    for livro in livros:
+        print(livro)
