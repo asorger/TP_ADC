@@ -49,42 +49,18 @@ def guarda_as_listas_em_ficheiros(livros: list, leitores: list, emprestimos: lis
         json.dump([leitor.__dict__ for leitor in leitores], f)
 
     with open('save/emprestimos.json', 'w') as f:
-        json.dump([emprestimo.__dict__ for emprestimo in emprestimos], f)
+        json.dump([emprestimo.to_dict() for emprestimo in emprestimos], f)
 
     with open('save/funcionarios.json', 'w') as f:
         json.dump([funcionario.__dict__ for funcionario in funcionarios], f)
 
     print("Dados salvos com sucesso!")
 
+import json
+
 def carrega_as_listas_dos_ficheiros():
     """
     Carrega listas de livros, leitores, empréstimos e funcionários a partir de arquivos JSON.
-
-    Esta função lê os dados dos arquivos `livros.json`, `leitores.json`, 
-    `emprestimos.json` e `funcionarios.json`, recriando as listas correspondentes 
-    a partir das informações armazenadas. Caso algum arquivo não seja encontrado, 
-    retorna uma lista vazia para aquele tipo de dado.
-
-    Returns
-    -------
-    tuple
-        Uma tupla contendo quatro listas:
-        - livros : list of Livro
-        Lista de objetos da classe `Livro` carregados do arquivo.
-        - leitores : list of Leitor
-        Lista de objetos da classe `Leitor` carregados do arquivo.
-        - emprestimos : list of Emprestimo
-        Lista de objetos da classe `Emprestimo` carregados do arquivo.
-        - funcionarios : list of Funcionario
-        Lista de objetos da classe `Funcionario` carregados do arquivo.
-
-    Exemplos
-    --------
-    >>> livros, leitores, emprestimos, funcionarios = carrega_as_listas_dos_ficheiros()
-    >>> print(len(livros))
-    10  # Supondo que havia 10 livros armazenados.
-    >>> print(len(leitores))
-    5   # Supondo que havia 5 leitores armazenados.
     """
     try:
         with open('save/livros.json', 'r') as f:
@@ -96,21 +72,38 @@ def carrega_as_listas_dos_ficheiros():
     try:
         with open('save/leitores.json', 'r') as f:
             leitores_data = json.load(f)
-            leitores = [Leitor(**leitor) for leitor in leitores_data]
+            leitores = []
+            ultimo_id_leitor = 0  # Controle manual de IDs
+            for leitor_data in leitores_data:
+                ultimo_id_leitor += 1  # Incrementa o ID manualmente
+                leitor = Leitor(leitor_data["nome"], leitor_data["idade"], leitor_data["email"])
+                leitores.append(leitor)
     except FileNotFoundError:
         leitores = []
 
     try:
         with open('save/emprestimos.json', 'r') as f:
             emprestimos_data = json.load(f)
-            emprestimos = [Emprestimo(**emprestimo) for emprestimo in emprestimos_data]
+            emprestimos = []
+            for emprestimo_data in emprestimos_data:
+                # Ajuste: não passamos o 'id' para o construtor de Funcionario
+                leitor = Leitor(emprestimo_data['leitor']['nome'], emprestimo_data['leitor']['idade'], emprestimo_data['leitor']['email'])
+                livro = Livro(**emprestimo_data['livro'])
+                # Ajuste: Cria o Funcionario com nome e cargo, sem passar o 'id'
+                funcionario = Funcionario(emprestimo_data['funcionario']['nome'], emprestimo_data['funcionario']['cargo'])
+                emprestimos.append(Emprestimo(leitor, livro, funcionario, emprestimo_data['data_emprestimo'], emprestimo_data['data_devolucao']))
     except FileNotFoundError:
         emprestimos = []
 
     try:
         with open('save/funcionarios.json', 'r') as f:
             funcionarios_data = json.load(f)
-            funcionarios = [Funcionario(**funcionario) for funcionario in funcionarios_data]
+            funcionarios = []
+            ultimo_id_funcionario = 0  
+            for funcionario_data in funcionarios_data:
+                ultimo_id_funcionario += 1 
+                funcionario = Funcionario(funcionario_data["nome"], funcionario_data["cargo"])
+                funcionarios.append(funcionario)
     except FileNotFoundError:
         funcionarios = []
 

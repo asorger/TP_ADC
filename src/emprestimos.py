@@ -70,6 +70,23 @@ class Emprestimo:
         'Empréstimo: João Silva - O Poder do Hábito | Funcionário: Maria Oliveira | Devolução: 2024-12-22'
         """
         return f"Empréstimo: {self.leitor.nome} - {self.livro.titulo} | Funcionário: {self.funcionario.nome} | Devolução: {self.data_devolucao}"
+    
+    def to_dict(self):
+        """
+        Converte o objeto Emprestimo em um dicionário para serialização.
+
+        Returns
+        -------
+        dict
+            Um dicionário representando o empréstimo.
+        """
+        return {
+            'leitor': self.leitor.__dict__,
+            'livro': self.livro.__dict__,
+            'funcionario': self.funcionario.__dict__,
+            'data_emprestimo': self.data_emprestimo,
+            'data_devolucao': self.data_devolucao
+        }
 
 def cria_novo_emprestimo(leitores, livros, funcionarios):
     """
@@ -146,3 +163,4 @@ def imprime_lista_de_emprestimos(emprestimos):
     print("Lista de Empréstimos:")
     for emprestimo in emprestimos:
         print(emprestimo)
+

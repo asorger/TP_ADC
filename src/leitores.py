@@ -1,13 +1,9 @@
 class Leitor:
     """
-    Representa um leitor de biblioteca com um ID gerado automaticamente.
+    Representa um leitor de biblioteca com nome, idade e email.
 
     Atributos
     ---------
-    ultimo_id : int
-        Controla o último ID atribuído a qualquer instância de `Leitor`.
-    id : int
-        Identificador único de cada instância de `Leitor`.
     nome : str
         Nome do leitor.
     idade : int
@@ -21,14 +17,12 @@ class Leitor:
 
     >>> leitor = Leitor("Ana", 25, "ana@email.com")
     >>> print(leitor)
-    ID: 1, Leitor: Ana, Idade: 25, Email: ana@email.com
+    Leitor: Ana, Idade: 25, Email: ana@email.com
     """
-
-    ultimo_id = 0
 
     def __init__(self, nome, idade, email):
         """
-        Inicializa uma nova instância de `Leitor` com um ID único.
+        Inicializa uma nova instância de `Leitor` sem um ID.
 
         Parâmetros
         ----------
@@ -39,8 +33,6 @@ class Leitor:
         email : str
             Endereço de email do leitor.
         """
-        Leitor.ultimo_id += 1
-        self.id = Leitor.ultimo_id
         self.nome = nome
         self.idade = idade
         self.email = email
@@ -52,9 +44,10 @@ class Leitor:
         Retorna
         -------
         str
-            Uma string contendo o ID, nome, idade e email do leitor.
+            Uma string contendo o nome, idade e email do leitor.
         """
-        return f"ID: {self.id}, Leitor: {self.nome}, Idade: {self.idade}, Email: {self.email}"
+        return f"Leitor: {self.nome}, Idade: {self.idade}, Email: {self.email}"
+
 
 
 def cria_novo_leitor():

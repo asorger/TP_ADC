@@ -1,16 +1,9 @@
 class Funcionario:
     """
-    Classe que representa um funcionário com ID, nome e cargo.
-
-    Atributos de classe
-    -------------------
-    ultimo_id : int
-        Mantém o último ID gerado para os funcionários.
-
-    Atributos de instância
-    -----------------------
-    id : int
-        ID único do funcionário.
+    Classe que representa um funcionário com nome e cargo.
+    
+    Atributos
+    ---------
     nome : str
         Nome do funcionário.
     cargo : str
@@ -20,23 +13,12 @@ class Funcionario:
     -------
     __str__()
         Retorna uma representação em string do funcionário.
-
-    Exemplos
-    --------
-    >>> funcionario1 = Funcionario("João", "Gerente")
-    >>> funcionario2 = Funcionario("Ana", "Analista")
-    >>> print(funcionario1)
-    ID: 1, Funcionário: João, Cargo: Gerente
-    >>> print(funcionario2)
-    ID: 2, Funcionário: Ana, Cargo: Analista
     """
-
-    ultimo_id = 0
 
     def __init__(self, nome, cargo):
         """
         Inicializa uma nova instância de Funcionario.
-
+        
         Parâmetros
         ----------
         nome : str
@@ -44,8 +26,6 @@ class Funcionario:
         cargo : str
             Cargo do funcionário.
         """
-        Funcionario.ultimo_id += 1
-        self.id = Funcionario.ultimo_id
         self.nome = nome
         self.cargo = cargo
 
@@ -56,9 +36,10 @@ class Funcionario:
         Returns
         -------
         str
-            Representação do funcionário com ID, nome e cargo.
+            Representação do funcionário com nome e cargo.
         """
-        return f"ID: {self.id}, Funcionário: {self.nome}, Cargo: {self.cargo}"
+        return f"Funcionário: {self.nome}, Cargo: {self.cargo}"
+
 
 def cria_novo_funcionario():
     """
