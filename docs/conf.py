@@ -7,25 +7,19 @@
 
 import os
 import sys
-sys.path.insert(0, 'C:\\Users\\admin\\Desktop\\ADC\\src')
+sys.path.insert(0, 'C:\\Users\\admin\\OneDrive - Universidade do Algarve\\Ambiente de Trabalho\\ADC\\TP_ADC\\src')
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Biblioteca Teca-Teca'
-copyright = '2024, Axel Sorger, Francisco Picoito, Luís Simões'
-author = 'Axel Sorger, Francisco Picoito, Luís Simões'
-
-version = '0'
-release = '0.1'
+project = 'src'
+copyright = '2024, Author'
+author = 'Author'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.todo',
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
@@ -39,7 +33,7 @@ language = 'en'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_book_theme'
+html_theme = 'alabaster'
 html_static_path = ['_static']
 
 # -- Options for todo extension ----------------------------------------------
